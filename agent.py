@@ -63,7 +63,7 @@ async def recall_research(ctx: RunContext[AgentContext]) -> str:
 
 # --- Agent definition ---
 agent = Agent(
-    "openai:gpt-4o",
+    "groq:llama-3.3-70b-versatile",
     deps_type=AgentContext,
     output_type=FounderBrief,
     tools=[search_web, recall_research],
