@@ -1,5 +1,5 @@
 pydantic-ai-slim[openai,logfire]==1.87.0
-logfire==4.32.1
+logfire[fastapi]==4.32.1
 fastapi==0.136.1
 uvicorn==0.35.0
 httpx==0.28.1
