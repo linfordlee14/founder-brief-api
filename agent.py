@@ -56,10 +56,13 @@ async def search_web(ctx: RunContext[AgentContext], query: str) -> str:
 
 async def recall_research(ctx: RunContext[AgentContext]) -> str:
     """Retrieve all previous research steps from session memory."""
-    memories = await get_all_memory(ctx.deps.session_id)
-    if not memories:
-        return "No previous research steps found."
-    return "\n\n---\n\n".join(f"[{k}]\n{v}" for k, v in memories.items())
+    try:
+        memories = await get_all_memory(ctx.deps.session_id)
+        if not memories:
+            return "No previous research steps found."
+        return "\n\n---\n\n".join(f"[{k}]\n{v}" for k, v in memories.items())
+    except Exception as e:
+        return f"Memory unavailable, proceed with search results only. Error: {str(e)}"
 
 # --- Agent definition ---
 agent = Agent(
