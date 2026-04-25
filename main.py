@@ -7,7 +7,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from slowapi import Limiter, _rate_limit_exceeded_handler
-from slowapi.util import get_remote_address
+from slowapi.util import get_ipaddr
 from slowapi.errors import RateLimitExceeded
 
 load_dotenv()
@@ -19,7 +19,7 @@ async def lifespan(app: FastAPI):
     logfire.instrument_fastapi(app)
     yield
 
-limiter = Limiter(key_func=get_remote_address)
+limiter = Limiter(key_func=get_ipaddr)
 
 app = FastAPI(
     title="Founder Brief API",
